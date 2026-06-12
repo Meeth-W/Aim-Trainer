@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --background: #09090b;
+  --foreground: #f4f4f5;
+  
+  --game-bg: #09090b;
+  --game-accent: #06b6d4;
+  --game-target: #f43f5e;
+  --game-hit: #10b981;
+  --game-ui: #f4f4f5;
+  --game-crosshair: #00ff00;
+}
+
+@theme {
+  --color-game-bg: var(--game-bg);
+  --color-game-accent: var(--game-accent);
+  --color-game-target: var(--game-target);
+  --color-game-hit: var(--game-hit);
+  --color-game-ui: var(--game-ui);
+  --color-game-crosshair: var(--game-crosshair);
+}
+
+body {
+  background-color: var(--game-bg);
+  color: var(--game-ui);
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+.glow-accent {
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+}
+
+.glow-target {
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
+}
+
+.glow-hit {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}

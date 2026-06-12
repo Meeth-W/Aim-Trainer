@@ -1,0 +1,51 @@
+datasource db {
+  provider = "sqlite"
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/client"
+}
+
+model UserSettings {
+  id                  String   @id @default("default-user")
+  valorantSensitivity Float    @default(0.35)
+  dpi                 Int      @default(1600)
+  pollingRate         Int      @default(1000)
+  mouseAcceleration   Boolean  @default(false)
+  mouseAccelExponent  Float    @default(1.05)
+  rawInput            Boolean  @default(true)
+  
+  themeBgColor        String   @default("#09090b")
+  themeAccentColor    String   @default("#06b6d4")
+  themeTargetColor    String   @default("#f43f5e")
+  themeHitColor       String   @default("#10b981")
+  themeUiColor        String   @default("#f4f4f5")
+  themeCrosshairColor String   @default("#00ff00")
+  
+  crosshairCode       String   @default("0;p;0;c;1;s;1;P;c;8;u;6E92FFFF;b;1;f;0;0t;1;0l;2;0v;2;0o;2;0a;1;0f;0;1b;0")
+}
+
+model Session {
+  id              String   @id @default(uuid())
+  mode            String   // SIX_SHOT, MULTISHOT, MULTISHOT_3X3
+  date            DateTime @default(now())
+  duration        Int      @default(30)
+  hits            Int
+  misses          Int
+  accuracy        Float
+  score           Int
+  
+  // Detailed tracking for heatmaps and performance analysis (stored as JSON string)
+  // Format: Array of events like { type: 'hit'|'miss'|'spawn', x, y, timestamp, targetId, reactionTime }
+  events          String   
+  reactionTimes   String   // Comma-separated list of reaction times in ms
+  avgReactionTime Float
+  bestReactionTime Float
+  worstReactionTime Float
+  
+  // Performance metrics
+  avgFps          Float
+  minFps          Float
+  droppedFrames   Int
+}
